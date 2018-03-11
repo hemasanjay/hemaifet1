@@ -1,0 +1,153 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Baby Monitoring</title>
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/82936647-1334-4E4F-8BFA-D0A02C810D40/main.js" charset="UTF-8"></script></head>
+<body>
+	<h1 align="center">Baby's Status Displayed Below</h1>
+	<h2 id="cry" align="center">Crying Status:Baby Sleeping</h2>
+<h2 id="motion" align="center">Baby's Motion Status:Baby Sleeping</h2>
+<h2 id="neighbour" align="center">Neighbourdetected:NONE</h2>
+<h2 id="diaper" align="center">Need to change diaper: NO</h2>
+<h2 id="backup" align="center"></h2>
+	<p id="info"></p>
+</body>
+<scriptsrc="http://cdn.pubnub.com/pubnub-3.7.1.min.js"></script>
+
+<script type="text/javascript">
+
+varPUBNUB_demo = PUBNUB.init({
+publish_key:   'pub-c-3d130cae-47f2-40d9-81d3-f409242790f3',subscribe_key: 'sub-c-7c0d8f3e-8ea4-11e7-867b-0a31f78815ec'
+});
+</script>
+<script>
+varPUBNUB_demo = PUBNUB.init({
+publish_key:   'pub-c-3d130cae-47f2-40d9-81d3-f409242790f3',subscribe_key: 'sub-c-7c0d8f3e-8ea4-11e7-867b-0a31f78815ec'
+});
+PUBNUB_demo.subscribe({
+channel: '4march1',
+noheresync: true, // don't do a here_now call on subscribe()
+message: function(m){
+if(m==1)
+      {
+document.getElementById("cry").innerHTML = "Crying Status:Baby Crying" ;
+      }
+	},
+presence: function(m) {
+msg = console.log(m);
+  },
+state: {
+name: 'hema',
+timestamp: new Date()
+  }
+//var res = $log.concat("Accident at the mentioned location");
+});
+</script>
+
+<script>
+varPUBNUB_demo = PUBNUB.init({
+publish_key:   'pub-c-3d130cae-47f2-40d9-81d3-f409242790f3',subscribe_key: 'sub-c-7c0d8f3e-8ea4-11e7-867b-0a31f78815ec'
+});
+PUBNUB_demo.subscribe({
+channel: '4march2',
+noheresync: true, // don't do a here_now call on subscribe()
+message: function(n){
+if(n==1)
+      {
+document.getElementById("motion").innerHTML = "Baby's Motion Status:Baby Moving" ;
+      }
+    },
+presence: function(n) {
+msg = console.log(n);
+  },
+state: {
+name: 'hema',
+timestamp: new Date()
+  }
+//var res = $log.concat("Accident at the mentioned location");
+});	
+</script>
+
+<script>
+varPUBNUB_demo = PUBNUB.init({
+publish_key:   'pub-c-3d130cae-47f2-40d9-81d3-f409242790f3',subscribe_key: 'sub-c-7c0d8f3e-8ea4-11e7-867b-0a31f78815ec'
+});
+PUBNUB_demo.subscribe({
+channel: '4march3',
+noheresync: true, // don't do a here_now call on subscribe()
+message: function(o){
+if(o==1)
+      {
+document.getElementById("neighbour").innerHTML = "Neighbourdetected:YES" ;
+      }
+    },
+presence: function(o) {
+msg = console.log(o);
+  },
+state: {
+name: 'hema',
+timestamp: new Date()
+  }
+//var res = $log.concat("Accident at the mentioned location");
+}); 
+</script>
+<script>
+varPUBNUB_demo = PUBNUB.init({
+publish_key:   'pub-c-3d130cae-47f2-40d9-81d3-f409242790f3',subscribe_key: 'sub-c-7c0d8f3e-8ea4-11e7-867b-0a31f78815ec'
+});
+PUBNUB_demo.subscribe({
+channel: '4march4',
+noheresync: true, // don't do a here_now call on subscribe()
+message: function(p){
+if(p==1)
+      {
+document.getElementById("diaper").innerHTML = "Need to change diaper: YES" ;
+      }
+    },
+presence: function(p) {
+msg = console.log(p);
+  },
+state: {
+name: 'hema',
+timestamp: new Date()
+  }
+//var res = $log.concat("Accident at the mentioned location");
+}); 
+</script>
+<script>
+varPUBNUB_demo = PUBNUB.init({
+publish_key:   'pub-c-3d130cae-47f2-40d9-81d3-f409242790f3',subscribe_key: 'sub-c-7c0d8f3e-8ea4-11e7-867b-0a31f78815ec'
+});
+PUBNUB_demo.subscribe({
+channel: '4march5',
+noheresync: true, // don't do a here_now call on subscribe()
+message: function(q){
+if(q==1)
+      {
+document.getElementById("backup").innerHTML = " " ;
+      }
+    },
+presence: function(q) {
+msg = console.log(q);
+  },
+state: {
+name: 'hema',
+timestamp: new Date()
+  }
+//var res = $log.concat("Accident at the mentioned location");
+}); 
+</script>
+<script type="text/javascript">
+varPUBNUB_demo = PUBNUB.init({
+publish_key:   'pub-c-3d130cae-47f2-40d9-81d3-f409242790f3',subscribe_key: 'sub-c-7c0d8f3e-8ea4-11e7-867b-0a31f78815ec'
+});
+var channel = '4march1';
+var p = PUBNUB.init({subscribe_key: 'sub-c-7c0d8f3e-8ea4-11e7-867b-0a31f78815ec', publish_key:   'pub-c-3d130cae-47f2-40d9-81d3-f409242790f3'
+});
+p.publish({
+channel : channel, 
+message : 2 // trigger
+  });
+</script>
+</html>

@@ -1,0 +1,66 @@
+#include <ESP8266WiFi.h>
+#define PubNub_BASE_CLIENTWiFiClient
+#include <PubNub.h>
+void setup() {
+  // put your setup code here, to run once:
+char                pass[]                = "electronics";
+char                ssid[]                = "Universal";
+int                 status;
+Serial.begin(9600);
+pinMode(02, INPUT);//Cry
+pinMode(04, INPUT);//Motion
+pinMode(05, INPUT);//Neighbour
+pinMode(12, INPUT);//Diaper change
+pinMode(13, INPUT);
+pinMode(06, OUTPUT);
+status = WiFi.begin(ssid, pass);
+status = WiFi.waitForConnectResult();
+Serial.print("Tryingonnect to ");
+Serial.println(ssid);
+// attempt to connect to Wifi network:
+status = WiFi.begin(ssid, pass);
+status = WiFi.waitForConnectResult();
+if (status != WL_CONNECTED) {
+    Serial.println("Connection Failed");
+    while (true) {}
+    }
+Serial.println("Connected.");
+Serial.print("MAC: ");
+Serial.println(WiFi.macAddress());
+Serial.print("IP:  ");
+Serial.println(WiFi.localIP());
+Serial.print("Subnet");
+Serial.println(WiFi.subnetMask());
+Serial.print("Gateway");
+Serial.println(WiFi.gatewayIP());
+Serial.print("DNS: ");
+Serial.println(WiFi.dnsIP());
+Serial.print("Channel");
+Serial.println(WiFi.channel());
+Serial.print("Status");
+Serial.println(WiFi.status());
+ PubNub.begin(/*publish key*/"pub-c-3d130cae-47f2-40d9-81d3-f409242790f3", /*subscribe key*/"sub-c-7c0d8f3e-8ea4-11e7-867b-0a31f78815ec");
+}
+void loop() { // put your main code here, to run repeatedly:
+PubNub_BASE_CLIENT *client = PubNub.publish("4marchStatus" ,"Connected");
+if(digitalRead(4)==HIGH)
+{
+client = PubNub.publish("4march1" ,"1");
+}
+if(digitalRead(2)==HIGH)
+{
+client = PubNub.publish("4march2" ,"1");
+}
+if(digitalRead(5)==HIGH)
+{
+client = PubNub.publish("4march3" ,"1");
+}
+if(digitalRead(12)==HIGH)
+{
+client = PubNub.publish("4march4" ,"1");
+}
+if(digitalRead(13)==HIGH)
+{
+client = PubNub.publish("4march5" ,"1");
+}
+}
